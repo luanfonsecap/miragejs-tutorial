@@ -102,6 +102,18 @@ export default function (environment = "development") {
 
         return list.reminders;
       });
+
+      this.post("/api/lists", (schema, request) => {
+        const attrs = JSON.parse(request.requestBody);
+
+        return schema.lists.create(attrs);
+      });
+
+      this.delete("/api/lists/:id", (schema, request) => {
+        const listId = request.params.id;
+
+        return schema.lists.find(listId).destroy();
+      });
     },
   });
 }
